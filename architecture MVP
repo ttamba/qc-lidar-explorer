@@ -1,0 +1,39 @@
+1) MVP statique — architecture cible (Option A)
+Composants
+
+Frontend : Vite + React + TypeScript + MapLibre
+
+Index tuiles : GeoJSON chunké (par grille/bbox), servi depuis public/index/...
+
+Intersection AOI ∩ tuiles : Turf.js (client)
+
+Export : ZIP (CSV + GeoJSON + README QGIS)
+
+Arborescence recommandée
+
+qc-lidar-explorer/
+  public/
+    basemaps.json
+    index/
+      lidar/
+        grid.json
+        chunks/
+          qk_0_0.geojson
+          qk_0_1.geojson
+          ...
+      mnt/
+        grid.json
+        chunks/...
+  src/
+    map/MapView.tsx
+    ui/LeftPanel.tsx
+    ui/LayerSwitcher.tsx
+    ui/Basket.tsx
+    aoi/importAoi.ts
+    selection/intersect.ts
+    index/loadChunks.ts
+    export/exportBundle.ts
+  scripts/
+    build_index.py
+  vite.config.ts
+  .github/workflows/deploy.yml
